@@ -55,6 +55,10 @@ public class Unit {
         this(name, type, null, null, bands, null);
     }
 
+    public String getTitle() {
+        return getName() + " " + type;
+    }
+
     public String getName() {
         return name;
     }
