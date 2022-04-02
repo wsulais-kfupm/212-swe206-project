@@ -1,6 +1,7 @@
 package edu.kfupm.swe206;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.transaction.Transactional;
 
 @Entity
+@Transactional
 public class Unit {
 
     @Id
@@ -54,6 +56,10 @@ public class Unit {
 
     public Unit(String name, UnitType type, Set<JobBand> bands) {
         this(name, type, null, null, bands, null);
+    }
+
+    public Unit(String name, UnitType type) {
+        this(name, type, new HashSet<JobBand>());
     }
 
     public String getTitle() {

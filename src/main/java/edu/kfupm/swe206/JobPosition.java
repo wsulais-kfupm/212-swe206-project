@@ -1,5 +1,6 @@
 package edu.kfupm.swe206;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -34,6 +35,10 @@ public class JobPosition {
         this.name = name;
         this.band = band;
         this.jobs = jobs;
+    }
+
+    public JobPosition(String name, JobBand band) {
+        this(name, band, new HashSet<Job>());
     }
 
     public String getName() {
