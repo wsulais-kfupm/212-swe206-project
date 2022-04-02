@@ -1,5 +1,6 @@
 package edu.kfupm.swe206;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -10,9 +11,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.OneToMany;
+import javax.transaction.Transactional;
 
 @Entity
+@Transactional
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = "JobBand.jobPositions", attributeNodes = @NamedAttributeNode("jobPositions")),
+        @NamedEntityGraph(name = "JobBand.units", attributeNodes = @NamedAttributeNode("units")),
+        @NamedEntityGraph(name = "JobBandEager", attributeNodes = { @NamedAttributeNode("units"),
+                @NamedAttributeNode("jobPositions") }), })
 public class JobBand {
 
     @Id
@@ -34,6 +45,10 @@ public class JobBand {
         this.name = name;
         this.jobPositions = jobPositions;
         this.units = units;
+    }
+
+    public JobBand(String name) {
+        this(name, new HashSet<JobPosition>(), new HashSet<Unit>());
     }
 
     public String getName() {
