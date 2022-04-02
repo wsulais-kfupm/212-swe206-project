@@ -19,15 +19,15 @@ public class Person {
 
     @Column(nullable = false)
     private String firstName;
-    private String lastName;
+    private String surname;
     @OneToMany(mappedBy = "employee")
     private Set<Job> jobs;
 
     protected Person() {}
 
-    public Person(String firstName, String lastName, Set<Job> jobs) {
+    public Person(String firstName, String surname, Set<Job> jobs) {
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.surname = surname;
         this.jobs = jobs;
     }
 
@@ -40,13 +40,13 @@ public class Person {
     }
 
     public String getName() {
-        return firstName + " " + lastName;
+        return firstName + " " + surname;
     }
 
     public void setName(String name) {
         String[] parts = name.split(" ");
         this.firstName = parts[0];
-        this.lastName = parts[1];
+        this.surname = parts[1];
     }
 
     public String getFirstName() {
@@ -57,17 +57,17 @@ public class Person {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     @Override
     public String toString() {
-        return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+        return "Person [id=" + id + ", firstName=" + firstName + ", surname=" + surname + "]";
     }
 
 }
