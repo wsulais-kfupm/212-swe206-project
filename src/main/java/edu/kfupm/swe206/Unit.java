@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.transaction.Transactional;
 
 @Entity
 public class Unit {
@@ -32,7 +33,7 @@ public class Unit {
     private Unit parent;
     @OneToMany(mappedBy = "parent")
     private Set<Unit> subunits;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "unit_job_bands", joinColumns = @JoinColumn(name = "unit_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "job_band_id", referencedColumnName = "id"))
     private Set<JobBand> bands;
     @OneToMany(mappedBy = "unit")
