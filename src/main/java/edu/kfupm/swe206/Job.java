@@ -25,6 +25,17 @@ public class Job {
     private JobPosition position;
     private int salary;
 
+    protected Job() {
+
+    }
+
+    public Job(Unit unit, Person employee, JobPosition position, int salary) {
+        this.unit = unit;
+        this.employee = employee;
+        this.position = position;
+        this.salary = salary;
+    }
+
     public Unit getUnit() {
         return unit;
     }
