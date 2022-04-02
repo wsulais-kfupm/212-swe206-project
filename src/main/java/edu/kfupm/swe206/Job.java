@@ -72,4 +72,9 @@ public class Job {
         this.salary = salary;
     }
 
+    @Override
+    public String toString() {
+        return "Job [id=" + id + ", employee=" + employee + ", position=" + position + ", salary=" + salary + ", unit="
+                + unit + "]";
+    }
 }
