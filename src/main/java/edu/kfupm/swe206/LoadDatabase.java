@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -17,32 +19,61 @@ class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initEmployees(PersonRepository repo) {
-        return (args) -> {
+    CommandLineRunner initEmployees(final PersonRepository repo) {
+        return args -> {
             repo.save(new Person("Wael", "Sulais", new HashSet<Job>()));
-            repo.findAll().forEach(person -> {
+            for (Person person : repo.findAll()) {
                 log.info("Preloaded " + person);
-            });
+            }
         };
     }
 
     @Bean
-    CommandLineRunner initJobBands(JobBandRepository bands, JobPositionRepository pos) {
+    CommandLineRunner initJobBands(final JobBandRepository bands, final JobPositionRepository pos) {
         return args -> {
-            JobBand engineering = new JobBand("Engineering", new HashSet<JobPosition>(), new HashSet<Unit>());
+            final JobBand engineering = new JobBand("Engineering");
             bands.save(engineering);
 
-            bands.findAll().forEach(band -> {
+            for (JobBand band : bands.findAll()) {
                 log.info("Preloaded " + band);
-            });
+            }
 
-            pos.save(new JobPosition("Lead Engineer", engineering, new HashSet<Job>()));
-            pos.save(new JobPosition("Senior Engineer", engineering, new HashSet<Job>()));
-            pos.save(new JobPosition("Engineer", engineering, new HashSet<Job>()));
+            pos.save(new JobPosition("Lead Engineer", engineering));
+            pos.save(new JobPosition("Senior Engineer", engineering));
+            pos.save(new JobPosition("Engineer", engineering));
 
-            pos.findAll().forEach(p -> {
+            for (JobPosition p : pos.findAll()) {
                 log.info("Preloaded " + p);
-            });
+            }
+        };
+    }
+
+    @Bean
+    CommandLineRunner initUnits(final JobBandRepository bands, final UnitRepository units) {
+        return args -> {
+            JobBand engineering = bands.findById(2L);
+            final Unit software = new Unit("Software", UnitType.Department);
+            software.getBands().add(engineering);
+            units.save(software);
+            engineering.getUnits().add(software);
+            for (Unit unit : units.findAll()) {
+                log.info("Preloaded " + unit);
+            }
+        };
+    }
+
+    @Bean
+    CommandLineRunner initJobs(final JobPositionRepository positions, final UnitRepository units,
+            final JobRepository jobs, final PersonRepository people) {
+        return args -> {
+            JobPosition position = positions.findById(5L).get();
+            final Unit software = units.findById(6L).get();
+            Person employee = people.findById(1L).get();
+            Job job = new Job(software, employee, position, 10_000);
+            jobs.save(job);
+            for (Job j : jobs.findAll()) {
+                log.info("Preloaded " + job);
+            }
         };
     }
 }
