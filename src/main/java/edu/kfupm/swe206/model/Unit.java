@@ -1,4 +1,4 @@
-package edu.kfupm.swe206;
+package edu.kfupm.swe206.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;

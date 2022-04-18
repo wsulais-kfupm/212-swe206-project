@@ -1,4 +1,4 @@
-package edu.kfupm.swe206;
+package edu.kfupm.swe206.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

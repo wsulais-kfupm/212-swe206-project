@@ -1,4 +1,4 @@
-package edu.kfupm.swe206;
+package edu.kfupm.swe206.model;
 
 import java.util.List;
 import java.util.Set;
@@ -23,7 +23,8 @@ public class Person {
     @OneToMany(mappedBy = "employee")
     private Set<Job> jobs;
 
-    protected Person() {}
+    protected Person() {
+    }
 
     public Person(String firstName, String surname, Set<Job> jobs) {
         this.firstName = firstName;

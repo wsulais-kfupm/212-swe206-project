@@ -13,6 +13,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import edu.kfupm.swe206.repo.*;
+import edu.kfupm.swe206.model.*;
+
 @Configuration
 class LoadDatabase {
 
