@@ -92,11 +92,17 @@ public class Candidate {
     public Employee acceptOffer(JobOffer jobOffer){
         return Employee(this,jobOffer);
          }
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
-    public void setNationalId(String nationalId) {
-        this.nationalId=nationalId;
+    public void setGender(Gender gender) {
+        this.gender=gender;
+    }
+    public EducationLevel getEducationLevel() {
+        return educationLevel;
+    }
+    public void setEducationLevel(EducationLevel educationLevel) {
+        this.educationLevel = educationLevel;
     }
 
     @Override
