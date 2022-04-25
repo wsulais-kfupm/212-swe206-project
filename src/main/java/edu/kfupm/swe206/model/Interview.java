@@ -1,11 +1,10 @@
 package edu.kfupm.swe206.model;
-
+import java.util.*;
 public class Interview{
     Employee interviewer;
     Candidate candidate;
-    .class date;
-    
-    @Enumerated(EnumType.STRING)
+    Date date;
+
     InterviewResult result;
 
     protected Interview(){
@@ -14,7 +13,7 @@ public class Interview{
     public Interview(Employee employee,Candidate candidate,Date date){
         this.interviewer=employee;
         this.candidate=candidate;
-        this.data=data;
+        this.date=date;
 
     }
     public Candidate getCandidate(){
@@ -26,14 +25,16 @@ public class Interview{
     public Employee getInterviewer(){
         return interviewer;
     }
-    public Employee setInterviewer(Employee interviewer){
-        this.employee= interviewer;
+
+    public void setInterviewer(Employee interviewer){
+
+        this.interviewer= interviewer;
     }
-    public .class getDate(){
+    public Date getDate(){
         return date;
     }
-    public void setDate(.class data){
-        this.data=date;
+    public void setDate(Date data){
+        this.date=date;
     }
     public InterviewResult getInterviewResult(){
         return result;
@@ -41,6 +42,6 @@ public class Interview{
     public void setInterviewResult(InterviewResult result){
         this.result=result;
     }
-    
+
 
 }

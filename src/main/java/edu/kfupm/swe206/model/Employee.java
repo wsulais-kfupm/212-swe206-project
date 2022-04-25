@@ -1,15 +1,11 @@
 package edu.kfupm.swe206.model;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
+import java.util.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
-import javax.persistence.Id;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 @Entity
 public class Employee extends Candidate {
@@ -21,7 +17,7 @@ public class Employee extends Candidate {
     @Column(nullable = false)
     private String forename;
     private String surname;
-    private File  CV;
+    private File CV;
     private String nationalId;
     @OneToMany(mappedBy = "employee")
     private Set<Interview> interviews;
@@ -36,7 +32,7 @@ public class Employee extends Candidate {
     protected Employee() {
     }
 
-    public Employee(String forename, String surname, Set<interview> interviews, Set<Job> jobs;) {
+    public Employee(String forename, String surname, Set<Interview> interviews, Set<Job> jobs) {
         this.forename = forename;
         this.surname = surname;
         this.interviews = interviews;
@@ -46,7 +42,7 @@ public class Employee extends Candidate {
         this.forename = candidate.getForename();
         this.surname = candidate.getSurname();
         this.interviews = candidate.getinterviews();
-        this.nationalId = candidate.nationalId();
+        this.nationalId = candidate.getNationalId();
 
     }
     //#######
@@ -54,13 +50,14 @@ public class Employee extends Candidate {
         this.jobs.add(new Job(this , jobOffer));
     }
 
-    public boolean hasInterviewConflict(.class date){
-        if(this.data.equals(date)){
-            return true;
+    public boolean hasInterviewConflict(Date date){
+
+        for (Interview s : interviews) {
+            if(s.date.equals(date))
+                return true;
         }
-        else{
-            return false;
-        }
+        return false;
+
 
 
     }

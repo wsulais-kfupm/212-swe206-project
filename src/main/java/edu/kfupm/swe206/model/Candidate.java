@@ -1,5 +1,6 @@
 package edu.kfupm.swe206.model;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 
@@ -25,7 +26,7 @@ public class Candidate {
     private String nationalId;
     @OneToMany(mappedBy = "employee")
     private Set<Interview> interviews;
-    @Enumerated(EnumType.STRING)
+
     Gender gender;
     EducationLevel educationLevel;
 
@@ -35,17 +36,17 @@ public class Candidate {
     protected Candidate() {
     }
 
-    public Candidate(String forename, String surname, Set<interview> interviews) {
+    public Candidate(String forename, String surname, Set<Interview> interviews) {
         this.forename = forename;
         this.surname = surname;
         this.interviews = interviews;
     }
 
-    public Set<interview> getinterviews() {
+    public Set<Interview> getinterviews() {
         return interviews;
     }
 
-    public void setinterviews(Set<interview> interviews) {
+    public void setinterviews(Set<Interview> interviews) {
         this.interviews = interviews;
     }
 
@@ -90,7 +91,7 @@ public class Candidate {
     }
 
     public Employee acceptOffer(JobOffer jobOffer){
-        return Employee(this,jobOffer);
+        return new Employee(this,jobOffer);
          }
     public Gender getGender() {
         return gender;

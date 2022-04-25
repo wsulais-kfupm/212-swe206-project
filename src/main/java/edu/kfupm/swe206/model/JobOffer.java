@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.Id;
 import javax.persistence.Enumerated;
+import java.util.Set;
 
 public class JobOffer{
 
@@ -20,13 +21,13 @@ public class JobOffer{
     private Unit unit;
     private JobPosition position;
     private double lowerSalary,higherSalary,offeredSalary;
-    public set<Benefits> benefits;
+    public Set<Benefit> benefits;
 
     protected JobOffer(){
         
     }
 
-    public JobOffer(Unit unit,JobPosition position,double lowerSalary,double higherSalary,double offeredSalary,  public set<Benefits> benefits){
+    public JobOffer(Unit unit,JobPosition position,double lowerSalary,double higherSalary,double offeredSalary, Set<Benefit> benefits){
         this.unit=unit;
         this.position=position;
         this.lowerSalary=lowerSalary;
