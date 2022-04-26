@@ -3,6 +3,8 @@ package edu.kfupm.swe206.model;
 import java.util.List;
 import java.util.Set;
 
+import java.io.File;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,8 +22,17 @@ public class Person {
     @Column(nullable = false)
     private String forename;
     private String surname;
+    @Column(nullable = false)
+    private Gender gender;
     @OneToMany(mappedBy = "employee")
     private Set<Job> jobs;
+
+    private File  cv;
+    private String nationalId;
+    @OneToMany(mappedBy = "employee")
+    private Set<Interview> interviews;
+    private EducationLevel educationLevel;
+    private int yearsOfExperince;
 
     protected Person() {
     }
@@ -64,6 +75,31 @@ public class Person {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getNationalId() {
+        return nationalId;
+    }
+    public void setNationalId(String nationalId) {
+        this.nationalId=nationalId;
+    }
+    public File getCV() {
+        return cv;
+    }
+    public void setCV(File CV) {
+        this.cv=cv;
+    }
+
+    public Employee acceptOffer(JobOffer jobOffer){
+        return new Employee(this, jobOffer);
+    }
+
+    public Set<Interview> getinterviews() {
+        return interviews;
+    }
+
+    public void setinterviews(Set<Interview> interviews) {
+        this.interviews = interviews;
     }
 
     @Override

@@ -2,7 +2,7 @@ package edu.kfupm.swe206.model;
 import java.util.*;
 public class Interview{
     Employee interviewer;
-    Candidate candidate;
+    Person person;
     Date date;
 
     InterviewResult result;
@@ -10,17 +10,17 @@ public class Interview{
     protected Interview(){
 
     }
-    public Interview(Employee employee,Candidate candidate,Date date){
+    public Interview(Employee employee,Person person,Date date){
         this.interviewer=employee;
-        this.candidate=candidate;
+        this.person=person;
         this.date=date;
 
     }
-    public Candidate getCandidate(){
-        return candidate;
+    public Person getPerson(){
+        return person;
     }
-    public void setCandidate(Candidate candidate){
-        this.candidate=candidate;
+    public void setPerson(Person person){
+        this.person=person;
     }
     public Employee getInterviewer(){
         return interviewer;

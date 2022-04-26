@@ -8,7 +8,7 @@ import java.util.*;
 import javax.persistence.*;
 
 @Entity
-public class Employee extends Candidate {
+public class Employee extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,11 +38,11 @@ public class Employee extends Candidate {
         this.interviews = interviews;
         this.jobs = jobs;
     }
-    public Employee(Candidate candidate,JobOffer jobOffer) {
-        this.forename = candidate.getForename();
-        this.surname = candidate.getSurname();
-        this.interviews = candidate.getinterviews();
-        this.nationalId = candidate.getNationalId();
+    public Employee(Person person,JobOffer jobOffer) {
+        this.forename = person.getForename();
+        this.surname = person.getSurname();
+        this.interviews = person.getinterviews();
+        this.nationalId = person.getNationalId();
 
     }
     //#######
