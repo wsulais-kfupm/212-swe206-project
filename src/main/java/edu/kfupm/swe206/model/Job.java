@@ -36,6 +36,10 @@ public class Job {
         this.salary = salary;
     }
 
+    public Job(Person employee, JobOffer offer) {
+        this(offer.getUnit(), employee, offer.getPosition(), (int) offer.getOfferedSalary());
+    }
+
     public Unit getUnit() {
         return unit;
     }
