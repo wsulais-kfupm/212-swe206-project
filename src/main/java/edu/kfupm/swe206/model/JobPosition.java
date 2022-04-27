@@ -20,25 +20,29 @@ public class JobPosition {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+
     @Column(nullable = false)
     private String name;
+
     @ManyToOne
     @JoinColumn(name = "band_id")
     private JobBand band;
     @OneToMany(mappedBy = "position")
     private Set<Job> jobs;
 
+    private double baseSalary;
     protected JobPosition() {
     }
 
-    public JobPosition(String name, JobBand band, Set<Job> jobs) {
+    public JobPosition(String name, JobBand band, Set<Job> jobs,double baseSalary) {
         this.name = name;
         this.band = band;
         this.jobs = jobs;
+        this.baseSalary=baseSalary;
     }
 
-    public JobPosition(String name, JobBand band) {
-        this(name, band, new HashSet<Job>());
+    public JobPosition(String name, JobBand band,double baseSalary) {
+        this(name, band, new HashSet<Job>(),baseSalary);
     }
 
     public String getName() {
@@ -63,6 +67,14 @@ public class JobPosition {
 
     public void setJobs(Set<Job> jobs) {
         this.jobs = jobs;
+    }
+
+    public double getBaseSalary() {
+        return baseSalary;
+    }
+
+    public void setBaseSalary(double baseSalary) {
+        this.baseSalary = baseSalary;
     }
 
     @Override
