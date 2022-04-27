@@ -36,12 +36,11 @@ public class JobOffer{
     public JobOffer(Candidate candidate,Unit unit,JobPosition position,Set<Benefit> benefits){
         this.unit=unit;
         this.position=position;
-        this.resetSalary(candidate,unit,position,benefits);
         this.candidate=candidate;
         this.benefits=benefits;
+        this.resetSalary();
     }
-    public void resetSalary(Candidate candidate,Unit unit,JobPosition position,Set<Benefit> benefits){
-        int sumOfRates=0;
+    public void resetSalary(){
         double base_salary = position.getBaseSalary();
         base_salary += unit.getType().salaryBonus;
         for (Benefit s : benefits) {
