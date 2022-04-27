@@ -72,16 +72,8 @@ public class JobOffer{
         return lowerSalary;
     }
 
-    public void setLowerSalary(double lowerSalary) {
-        this.lowerSalary = lowerSalary;
-    }
-
     public double getHigherSalary() {
         return higherSalary;
-    }
-
-    public void setHigherSalary(double higherSalary) {
-        this.higherSalary = higherSalary;
     }
 
     public double getOfferedSalary() {
