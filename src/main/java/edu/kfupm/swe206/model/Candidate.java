@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Id;
 
 @Entity
-public class Person {
+public class Candidate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +25,6 @@ public class Person {
     @Column(nullable = false)
     private Gender gender;
     @OneToMany(mappedBy = "employee")
-    private Set<Job> jobs;
 
     private File  cv;
     private String nationalId;
@@ -34,22 +33,17 @@ public class Person {
     private EducationLevel educationLevel;
     private int yearsOfExperince;
 
-    protected Person() {
+
+    protected Candidate() {
     }
 
-    public Person(String forename, String surname, Set<Job> jobs) {
+    public Candidate(String forename, String surname, Set<Interview> interviews) {
         this.forename = forename;
         this.surname = surname;
-        this.jobs = jobs;
+        this.interviews = interviews;
     }
 
-    public Set<Job> getJobs() {
-        return jobs;
-    }
 
-    public void setJobs(Set<Job> jobs) {
-        this.jobs = jobs;
-    }
 
     public String getName() {
         return forename + " " + surname;
@@ -90,6 +84,14 @@ public class Person {
         this.cv=cv;
     }
 
+    public int getYearsOfExperince() {
+        return yearsOfExperince;
+    }
+
+    public void setYearsOfExperince(int yearsOfExperince) {
+        this.yearsOfExperince = yearsOfExperince;
+    }
+
     public Employee acceptOffer(JobOffer jobOffer){
         return new Employee(this, jobOffer);
     }
@@ -102,9 +104,22 @@ public class Person {
         this.interviews = interviews;
     }
 
+    public Gender getGender() {
+        return gender;
+    }
+    public void setGender(Gender gender) {
+        this.gender=gender;
+    }
+    public EducationLevel getEducationLevel() {
+        return educationLevel;
+    }
+    public void setEducationLevel(EducationLevel educationLevel) {
+        this.educationLevel = educationLevel;
+    }
+
     @Override
     public String toString() {
-        return "Person [id=" + id + ", forename=" + forename + ", surname=" + surname + "]";
+        return "Candidate [id=" + id + ", forename=" + forename + ", surname=" + surname + "]";
     }
 
 }
