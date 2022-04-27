@@ -43,12 +43,7 @@ public class JobOffer{
     public void resetSalary(Candidate candidate,Unit unit,JobPosition position,Set<Benefit> benefits){
         int sumOfRates=0;
         double base_salary = position.getBaseSalary();
-        if (unit.getType().equals(UnitType.Division)){
-            base_salary+=1000;
-        }
-        else if(unit.getType().equals(UnitType.Directorate)){
-            base_salary+=500;
-        }
+        base_salary += unit.getType().salaryBonus;
         for (Benefit s : benefits) {
             sumOfRates+=s.getSalaryRate();
         }
