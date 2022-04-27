@@ -22,11 +22,11 @@ class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initEmployees(final PersonRepository repo) {
+    CommandLineRunner initEmployees(final CandidateRepository repo) {
         return args -> {
-            repo.save(new Person("Wael", "Sulais", new HashSet<Job>()));
-            for (Person person : repo.findAll()) {
-                log.info("Preloaded " + person);
+            repo.save(new Candidate("Wael", "Sulais", new HashSet<Interview>()));
+            for (Candidate Candidate : repo.findAll()) {
+                log.info("Preloaded " + Candidate);
             }
         };
     }
@@ -41,9 +41,9 @@ class LoadDatabase {
                 log.info("Preloaded " + band);
             }
 
-            pos.save(new JobPosition("Lead Engineer", engineering));
-            pos.save(new JobPosition("Senior Engineer", engineering));
-            pos.save(new JobPosition("Engineer", engineering));
+            pos.save(new JobPosition("Lead Engineer", engineering,10000));
+            pos.save(new JobPosition("Senior Engineer", engineering,14000));
+            pos.save(new JobPosition("Engineer", engineering,8000));
 
             for (JobPosition p : pos.findAll()) {
                 log.info("Preloaded " + p);
@@ -67,11 +67,11 @@ class LoadDatabase {
 
     @Bean
     CommandLineRunner initJobs(final JobPositionRepository positions, final UnitRepository units,
-            final JobRepository jobs, final PersonRepository people) {
+            final JobRepository jobs, final CandidateRepository people) {
         return args -> {
             JobPosition position = positions.findById(5L).get();
             final Unit software = units.findById(6L).get();
-            Person employee = people.findById(1L).get();
+            Candidate employee = people.findById(1L).get();
             Job job = new Job(software, employee, position, 10_000);
             jobs.save(job);
             for (Job j : jobs.findAll()) {

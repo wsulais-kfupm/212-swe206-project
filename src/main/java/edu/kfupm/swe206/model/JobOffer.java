@@ -1,7 +1,7 @@
 package edu.kfupm.swe206.model;
 
 
-import jdk.internal.net.http.common.Pair;
+
 
 import java.util.List;
 import java.util.Set;
@@ -105,7 +105,5 @@ public class JobOffer{
         this.benefits = benefits;
     }
 
-    public Pair<Double, Double> getSalaryRange(){
-        return new Pair<Double, Double>(lowerSalary,higherSalary);
-    }
+
 }
