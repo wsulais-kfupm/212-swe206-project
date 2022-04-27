@@ -18,6 +18,9 @@ import java.util.stream.Stream;
 
 public class JobOffer{
 
+    /** Years of Experience Bonus Rate
+     *  */
+    public static final double YOE_RATE = 500.;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,14 +44,11 @@ public class JobOffer{
         this.resetSalary();
     }
     public void resetSalary(){
-        double base_salary = position.getBaseSalary();
-        base_salary += unit.getType().salaryBonus;
-        for (Benefit s : benefits) {
-            sumOfRates+=s.getSalaryRate();
-        }
-        lowerSalary = Math.max(base_salary,base_salary+500*(candidate.getYearsOfExperince()-2))*(1+sumOfRates);
-        higherSalary = (base_salary+500*(candidate.getYearsOfExperince()+2))*(1+sumOfRates);
-        offeredSalary=(higherSalary+lowerSalary)/2;
+        double base_salary = position.getBaseSalary() + unit.getType().salaryBonus;
+        double sumOfRates = 1+benefits.stream().mapToDouble(e -> e.getSalaryRate()).sum();
+        this.lowerSalary = (base_salary + YOE_RATE*Math.max(0, candidate.getYearsOfExperince()-2))*sumOfRates;
+        this.higherSalary = (base_salary+ YOE_RATE*(candidate.getYearsOfExperince()+2))*sumOfRates;
+        this.offeredSalary=(higherSalary+lowerSalary)/2;
     }
 
     public Unit getUnit() {
