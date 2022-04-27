@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Id;
 import javax.persistence.Enumerated;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class JobOffer{
 
@@ -26,18 +27,34 @@ public class JobOffer{
     private JobPosition position;
     private double lowerSalary,higherSalary,offeredSalary;
     public Set<Benefit> benefits;
+    private Candidate candidate;
 
     protected JobOffer(){
         
     }
 
-    public JobOffer(Unit unit,JobPosition position,double lowerSalary,double higherSalary,double offeredSalary, Set<Benefit> benefits){
+    public JobOffer(Candidate candidate,Unit unit,JobPosition position,Set<Benefit> benefits){
         this.unit=unit;
         this.position=position;
-        this.lowerSalary=lowerSalary;
-        this.higherSalary=higherSalary;
-        this.offeredSalary=offeredSalary;
+        this.resetSalary(candidate,unit,position,benefits);
+        this.candidate=candidate;
         this.benefits=benefits;
+    }
+    public void resetSalary(Candidate candidate,Unit unit,JobPosition position,Set<Benefit> benefits){
+        int sumOfRates=0;
+        double base_salary = position.getBaseSalary();
+        if (unit.getType().equals(UnitType.Division)){
+            base_salary+=1000;
+        }
+        else if(unit.getType().equals(UnitType.Directorate)){
+            base_salary+=500;
+        }
+        for (Benefit s : benefits) {
+            sumOfRates+=s.getSalaryRate();
+        }
+        lowerSalary = Math.max(base_salary,base_salary+500*(candidate.getYearsOfExperince()-2))*(1+sumOfRates);
+        higherSalary = (base_salary+500*(candidate.getYearsOfExperince()+2))*(1+sumOfRates);
+        offeredSalary=(higherSalary+lowerSalary)/2;
     }
 
     public Unit getUnit() {
