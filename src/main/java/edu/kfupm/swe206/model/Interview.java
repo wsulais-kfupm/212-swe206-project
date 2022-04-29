@@ -20,7 +20,7 @@ public class Interview{
     Employee interviewer;
     @ManyToOne
     @JoinColumn(name = "candidate_id")
-    Candidate Candidate;
+    Candidate candidate;
     Date date;
 
     InterviewResult result;
@@ -28,17 +28,17 @@ public class Interview{
     protected Interview(){
 
     }
-    public Interview(Employee employee,Candidate Candidate,Date date){
+    public Interview(Employee employee,Candidate candidate,Date date){
         this.interviewer=employee;
-        this.Candidate=Candidate;
+        this.candidate=candidate;
         this.date=date;
 
     }
     public Candidate getCandidate(){
-        return Candidate;
+        return candidate;
     }
-    public void setCandidate(Candidate Candidate){
-        this.Candidate=Candidate;
+    public void setCandidate(Candidate candidate){
+        this.candidate=candidate;
     }
     public Employee getInterviewer(){
         return interviewer;

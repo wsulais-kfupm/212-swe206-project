@@ -27,7 +27,7 @@ public class Candidate {
     private Gender gender;
     private File  cv;
     private String nationalId;
-    @OneToMany(mappedBy = "Candidate")
+    @OneToMany(mappedBy = "candidate")
     private Set<Interview> interviews;
     @OneToMany(mappedBy = "candidate")
     private Set<JobOffer> jobOffers;
