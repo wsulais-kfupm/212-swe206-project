@@ -38,7 +38,7 @@ public class JobOffer{
     @ManyToOne
     @JoinColumn(name = "job_position_id", nullable=false)
     private JobPosition position;
-    private double lowerSalary,higherSalary,offeredSalary;
+    private double offeredSalary;
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "job_offer_benefits", joinColumns = @JoinColumn(name = "job_offer_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "benefit_id", referencedColumnName = "id"))
     public Set<Benefit> benefits;
@@ -55,14 +55,7 @@ public class JobOffer{
         this.position=position;
         this.candidate=candidate;
         this.benefits=benefits;
-        this.resetSalary();
-    }
-    public void resetSalary(){
-        double base_salary = position.getBaseSalary() + unit.getType().salaryBonus;
-        double sumOfRates = 1+benefits.stream().mapToDouble(e -> e.getSalaryRate()).sum();
-        this.lowerSalary = (base_salary + YOE_RATE*Math.max(0, candidate.getYearsOfExperince()-2))*sumOfRates;
-        this.higherSalary = (base_salary+ YOE_RATE*(candidate.getYearsOfExperince()+2))*sumOfRates;
-        this.offeredSalary=(higherSalary+lowerSalary)/2;
+        this.offeredSalary = getBaseSalary()*getBenefitRates();
     }
 
     Candidate getCandidate() {
@@ -89,12 +82,24 @@ public class JobOffer{
         this.position = position;
     }
 
+    public double getBaseSalary() {
+        return position.getBaseSalary() + unit.getType().salaryBonus;
+    }
+
+    public double getBenefitRates() {
+        return 1+benefits.stream().mapToDouble(e -> e.getSalaryRate()).sum();
+    }
+
+    private double getSalary(int years) {
+        return (getBaseSalary()+YOE_RATE*years)*getBenefitRates();
+    }
+
     public double getLowerSalary() {
-        return lowerSalary;
+        return getSalary(Math.max(0, candidate.getYearsOfExperience()-2));
     }
 
     public double getHigherSalary() {
-        return higherSalary;
+        return getSalary(candidate.getYearsOfExperience()+2);
     }
 
     public double getOfferedSalary() {
