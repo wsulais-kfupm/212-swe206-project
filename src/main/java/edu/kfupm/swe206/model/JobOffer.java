@@ -65,6 +65,14 @@ public class JobOffer{
         this.offeredSalary=(higherSalary+lowerSalary)/2;
     }
 
+    Candidate getCandidate() {
+        return candidate;
+    }
+
+    void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
+    }
+
     public Unit getUnit() {
         return unit;
     }
