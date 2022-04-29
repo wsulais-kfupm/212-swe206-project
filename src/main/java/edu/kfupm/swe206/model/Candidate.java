@@ -33,7 +33,7 @@ public class Candidate {
     @OneToMany(mappedBy = "candidate")
     private Set<JobOffer> jobOffers;
     private EducationLevel educationLevel;
-    private int yearsOfExperince;
+    private int yearsOfExperience;
 
     @OneToOne
     private Employee employee;
@@ -91,16 +91,18 @@ public class Candidate {
         this.cv=cv;
     }
 
-    public int getYearsOfExperince() {
-        return yearsOfExperince;
+    public int getYearsOfExperience() {
+        return yearsOfExperience;
     }
 
-    public void setYearsOfExperince(int yearsOfExperince) {
-        this.yearsOfExperince = yearsOfExperince;
+    public void setYearsOfExperience(int yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
     }
 
     public Employee acceptOffer(JobOffer jobOffer){
-        Employee employee = new Employee(this);
+        if (employee == null) {
+            employee = new Employee(this);
+        }
         employee.addJob(jobOffer);
         return employee;
     }
