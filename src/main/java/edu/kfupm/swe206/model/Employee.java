@@ -33,6 +33,34 @@ public class Employee {
         this.jobs.add(new Job(this, jobOffer));
     }
 
+    public Candidate getCandidate() {
+        return candidate;
+    }
+    public Set<Job> getJobs() {
+        return jobs;
+    }
+    public void setJobs(Set<Job> jobs) {
+        //Do all the jobs belong to this employee?
+        boolean allBelong = jobs.stream().allMatch(e -> e.getEmployee().equals(this));
+        if (allBelong) {
+            this.jobs = jobs;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+    public Set<Interview> getInterviews() {
+        return interviews;
+    }
+    public void setInterviews(Set<Interview> interviews) {
+        //Do all the interviews belong to this employee?
+        boolean allBelong = interviews.stream().allMatch(e -> e.getInterviewer().equals(this));
+        if (allBelong) {
+            this.interviews = interviews;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public boolean hasInterviewConflict(Date date){
 
         for (Interview s : interviews) {
