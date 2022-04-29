@@ -19,7 +19,7 @@ public class Job {
     private Unit unit;
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    private Candidate employee;
+    private Employee employee;
     @ManyToOne
     @JoinColumn(name = "job_position_id")
     private JobPosition position;
@@ -29,14 +29,14 @@ public class Job {
 
     }
 
-    public Job(Unit unit, Candidate employee, JobPosition position, int salary) {
+    public Job(Unit unit, Employee employee, JobPosition position, int salary) {
         this.unit = unit;
         this.employee = employee;
         this.position = position;
         this.salary = salary;
     }
 
-    public Job(Candidate employee, JobOffer offer) {
+    public Job(Employee employee, JobOffer offer) {
         this(offer.getUnit(), employee, offer.getPosition(), (int) offer.getOfferedSalary());
     }
 
@@ -48,7 +48,7 @@ public class Job {
         this.unit = unit;
     }
 
-    public Candidate getEmployee() {
+    public Employee getEmployee() {
         return employee;
     }
 
@@ -56,7 +56,7 @@ public class Job {
         return unit.getName() + " " + position.getName();
     }
 
-    public void setEmployee(Candidate employee) {
+    public void setEmployee(Employee employee) {
         this.employee = employee;
     }
 

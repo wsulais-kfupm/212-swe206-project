@@ -23,15 +23,14 @@ public class Employee {
     protected Employee() {
     }
 
-    public Employee(Candidate Candidate,JobOffer jobOffer) {
+    public Employee(Candidate Candidate) {
         this.candidate = Candidate;
         this.jobs = new HashSet<>();
         this.interviews = new HashSet<>();
-        addJob(jobOffer);
     }
 
     public void addJob(JobOffer jobOffer){
-        this.jobs.add(new Job(this.candidate, jobOffer));
+        this.jobs.add(new Job(this, jobOffer));
     }
 
     public boolean hasInterviewConflict(Date date){

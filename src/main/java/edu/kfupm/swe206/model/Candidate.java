@@ -94,7 +94,9 @@ public class Candidate {
     }
 
     public Employee acceptOffer(JobOffer jobOffer){
-        return new Employee(this, jobOffer);
+        Employee employee = new Employee(this);
+        employee.addJob(jobOffer);
+        return employee;
     }
 
     public Set<Interview> getinterviews() {

@@ -22,9 +22,15 @@ class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initEmployees(final CandidateRepository repo) {
+    CommandLineRunner initCandidates(final CandidateRepository repo) {
         return args -> {
             repo.save(new Candidate("Wael", "Sulais", Gender.MALE));
+            for (Candidate Candidate : repo.findAll()) {
+                log.info("Preloaded " + Candidate);
+            }
+
+            Candidate candidate = repo.findById(1L).get();
+            Employee employee = new Employee(candidate);
             for (Candidate Candidate : repo.findAll()) {
                 log.info("Preloaded " + Candidate);
             }
@@ -71,7 +77,7 @@ class LoadDatabase {
         return args -> {
             JobPosition position = positions.findById(5L).get();
             final Unit software = units.findById(6L).get();
-            Candidate employee = people.findById(1L).get();
+            Employee employee = new Employee(people.findById(1L).get());
             Job job = new Job(software, employee, position, 10_000);
             jobs.save(job);
             for (Job j : jobs.findAll()) {
