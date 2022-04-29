@@ -29,6 +29,8 @@ public class Candidate {
     private String nationalId;
     @OneToMany(mappedBy = "Candidate")
     private Set<Interview> interviews;
+    @OneToMany(mappedBy = "candidate")
+    private Set<JobOffer> jobOffers;
     private EducationLevel educationLevel;
     private int yearsOfExperince;
 
@@ -42,6 +44,7 @@ public class Candidate {
         this.interviews = interviews;
         this.gender = gender;
         this.interviews = new HashSet<>();
+        this.jobOffers = new HashSet<>();
     }
 
 
