@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Id;
 
 @Entity
@@ -34,6 +35,8 @@ public class Candidate {
     private EducationLevel educationLevel;
     private int yearsOfExperince;
 
+    @OneToOne
+    private Employee employee;
 
     protected Candidate() {
     }
@@ -121,6 +124,16 @@ public class Candidate {
     }
     public void setEducationLevel(EducationLevel educationLevel) {
         this.educationLevel = educationLevel;
+    }
+    public Employee getEmployee() {
+        return employee;
+    }
+    void setEmployee(Employee employee) {
+        if (employee.getCandidate().equals(this)) {
+            this.employee = employee;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override

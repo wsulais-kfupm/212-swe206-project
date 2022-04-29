@@ -25,6 +25,7 @@ public class Employee {
 
     public Employee(Candidate Candidate) {
         this.candidate = Candidate;
+        this.candidate.setEmployee(this);
         this.jobs = new HashSet<>();
         this.interviews = new HashSet<>();
     }
