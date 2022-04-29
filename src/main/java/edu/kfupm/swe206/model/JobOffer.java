@@ -95,11 +95,11 @@ public class JobOffer{
     }
 
     public double getLowerSalary() {
-        return getSalary(Math.max(0, candidate.getYearsOfExperience()-2));
+        return getSalary(Math.max(0, candidate.getExperience().getYears()-2));
     }
 
     public double getHigherSalary() {
-        return getSalary(candidate.getYearsOfExperience()+2);
+        return getSalary(candidate.getExperience().getYears()+2);
     }
 
     public double getOfferedSalary() {

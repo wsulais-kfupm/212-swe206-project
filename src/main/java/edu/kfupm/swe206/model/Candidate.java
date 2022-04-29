@@ -3,6 +3,7 @@ package edu.kfupm.swe206.model;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
+import java.time.Period;
 
 import java.io.File;
 
@@ -33,7 +34,7 @@ public class Candidate {
     @OneToMany(mappedBy = "candidate")
     private Set<JobOffer> jobOffers;
     private EducationLevel educationLevel;
-    private int yearsOfExperience;
+    private Period experience;
 
     @OneToOne
     private Employee employee;
@@ -91,12 +92,12 @@ public class Candidate {
         this.cv=cv;
     }
 
-    public int getYearsOfExperience() {
-        return yearsOfExperience;
+    public Period getExperience() {
+        return this.experience;
     }
 
-    public void setYearsOfExperience(int yearsOfExperience) {
-        this.yearsOfExperience = yearsOfExperience;
+    public void setExperience(Period experience) {
+        this.experience = experience;
     }
 
     public Employee acceptOffer(JobOffer jobOffer){

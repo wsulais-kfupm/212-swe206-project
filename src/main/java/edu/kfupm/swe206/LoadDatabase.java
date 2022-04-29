@@ -24,12 +24,13 @@ class LoadDatabase {
     @Bean
     CommandLineRunner initCandidates(final CandidateRepository repo, final EmployeeRepository employees) {
         return args -> {
-            repo.save(new Candidate("Wael", "Sulais", Gender.MALE));
+            Candidate candidate = new Candidate("Wael", "Sulais", Gender.MALE);
+            candidate.setExperience(java.time.Period.ofYears(5));
+            repo.save(candidate);
             for (Candidate Candidate : repo.findAll()) {
                 log.info("Preloaded " + Candidate);
             }
 
-            Candidate candidate = repo.findById(1L).get();
             employees.save(new Employee(candidate));
             for (Employee employee : employees.findAll()) {
                 log.info("Preloaded " + employee);
