@@ -24,7 +24,7 @@ class LoadDatabase {
     @Bean
     CommandLineRunner initEmployees(final CandidateRepository repo) {
         return args -> {
-            repo.save(new Candidate("Wael", "Sulais", new HashSet<Interview>()));
+            repo.save(new Candidate("Wael", "Sulais", Gender.MALE));
             for (Candidate Candidate : repo.findAll()) {
                 log.info("Preloaded " + Candidate);
             }

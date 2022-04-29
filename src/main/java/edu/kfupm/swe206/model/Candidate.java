@@ -2,6 +2,7 @@ package edu.kfupm.swe206.model;
 
 import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 
 import java.io.File;
 
@@ -37,10 +38,12 @@ public class Candidate {
     protected Candidate() {
     }
 
-    public Candidate(String forename, String surname, Set<Interview> interviews) {
+    public Candidate(String forename, String surname, Gender gender) {
         this.forename = forename;
         this.surname = surname;
         this.interviews = interviews;
+        this.gender = gender;
+        this.interviews = new HashSet<>();
     }
 
 
