@@ -22,7 +22,7 @@ class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initCandidates(final CandidateRepository repo) {
+    CommandLineRunner initCandidates(final CandidateRepository repo, final EmployeeRepository employees) {
         return args -> {
             repo.save(new Candidate("Wael", "Sulais", Gender.MALE));
             for (Candidate Candidate : repo.findAll()) {
@@ -30,9 +30,9 @@ class LoadDatabase {
             }
 
             Candidate candidate = repo.findById(1L).get();
-            Employee employee = new Employee(candidate);
-            for (Candidate Candidate : repo.findAll()) {
-                log.info("Preloaded " + Candidate);
+            employees.save(new Employee(candidate));
+            for (Employee employee : employees.findAll()) {
+                log.info("Preloaded " + employee);
             }
         };
     }
@@ -60,7 +60,7 @@ class LoadDatabase {
     @Bean
     CommandLineRunner initUnits(final JobBandRepository bands, final UnitRepository units) {
         return args -> {
-            JobBand engineering = bands.findById(2L);
+            JobBand engineering = bands.findById(3L);
             final Unit software = new Unit("Software", UnitType.Department);
             software.getBands().add(engineering);
             units.save(software);
@@ -73,11 +73,11 @@ class LoadDatabase {
 
     @Bean
     CommandLineRunner initJobs(final JobPositionRepository positions, final UnitRepository units,
-            final JobRepository jobs, final CandidateRepository people) {
+            final JobRepository jobs, final EmployeeRepository employees) {
         return args -> {
-            JobPosition position = positions.findById(5L).get();
-            final Unit software = units.findById(6L).get();
-            Employee employee = new Employee(people.findById(1L).get());
+            JobPosition position = positions.findById(6L).get();
+            final Unit software = units.findById(7L).get();
+            Employee employee = employees.findById(2L).get();
             Job job = new Job(software, employee, position, 10_000);
             jobs.save(job);
             for (Job j : jobs.findAll()) {
