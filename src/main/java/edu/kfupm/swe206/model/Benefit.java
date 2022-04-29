@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Id;
 import javax.persistence.Enumerated;
 
+@Entity
 public class Benefit{
 
 
@@ -17,7 +18,9 @@ public class Benefit{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(nullable=false)
     String name;
+    @Column(nullable=false)
     private double salaryRate;
 
     protected Benefit(){

@@ -10,12 +10,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Id;
 import javax.persistence.Enumerated;
 import java.util.Set;
 import java.util.stream.Stream;
 
+@Entity
 public class JobOffer{
 
     /** Years of Experience Bonus Rate
@@ -26,10 +32,18 @@ public class JobOffer{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @ManyToOne
+    @JoinColumn(name = "unit_id", nullable=false)
     private Unit unit;
+    @ManyToOne
+    @JoinColumn(name = "job_position_id", nullable=false)
     private JobPosition position;
     private double lowerSalary,higherSalary,offeredSalary;
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "job_offer_benefits", joinColumns = @JoinColumn(name = "job_offer_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "benefit_id", referencedColumnName = "id"))
     public Set<Benefit> benefits;
+    @ManyToOne
+    @JoinColumn(name = "candidate_id", nullable=false)
     private Candidate candidate;
 
     protected JobOffer(){
