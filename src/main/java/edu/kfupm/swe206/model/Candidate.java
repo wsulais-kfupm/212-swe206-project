@@ -66,7 +66,7 @@ public class Candidate {
         return forename;
     }
 
-    public void setForename(String firstName) {
+    public void setForename(String forename) {
         this.forename = forename;
     }
 
