@@ -54,10 +54,10 @@ public class Interview{
     public void setDate(Date data){
         this.date=date;
     }
-    public InterviewResult getInterviewResult(){
+    public InterviewResult getResult(){
         return result;
     }
-    public void setInterviewResult(InterviewResult result){
+    public void setResult(InterviewResult result){
         this.result=result;
     }
 
