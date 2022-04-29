@@ -8,46 +8,30 @@ import java.util.*;
 import javax.persistence.*;
 
 @Entity
-public class Employee extends Candidate {
-
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false)
-    private String forename;
-    private String surname;
-    private File CV;
-    private String nationalId;
-    @OneToMany(mappedBy = "interviewer")
-    private Set<Interview> interviews;
+    @OneToOne
+    private Candidate candidate;
     @OneToMany(mappedBy = "employee")
     private Set<Job> jobs;
-    @Enumerated(EnumType.STRING)
-    Gender gender;
-    EducationLevel educationLevel;
-
-    int yearsOfExperince;
-
+    @OneToMany(mappedBy = "interviewer")
+    private Set<Interview> interviews;
 
     protected Employee() {
     }
 
-    public Employee(String forename, String surname, Set<Interview> interviews, Set<Job> jobs) {
-        this.forename = forename;
-        this.surname = surname;
-        this.interviews = interviews;
-        this.jobs = jobs;
-    }
     public Employee(Candidate Candidate,JobOffer jobOffer) {
-        this.forename = Candidate.getForename();
-        this.surname = Candidate.getSurname();
-        this.interviews = Candidate.getinterviews();
-        this.nationalId = Candidate.getNationalId();
+        this.candidate = Candidate;
+        this.jobs = new HashSet<>();
+        this.interviews = new HashSet<>();
+        addJob(jobOffer);
     }
 
     public void addJob(JobOffer jobOffer){
-        this.jobs.add(new Job(this , jobOffer));
+        this.jobs.add(new Job(this.candidate, jobOffer));
     }
 
     public boolean hasInterviewConflict(Date date){
@@ -64,7 +48,7 @@ public class Employee extends Candidate {
 
     @Override
     public String toString() {
-        return "Employee [id=" + id + ", forename=" + forename + ", surname=" + surname + ", national Id="+ nationalId +", years Of experince="+ yearsOfExperince+", number of Interviews="+ interviews.size() +"]";
+        return "Employee [candidate=" + candidate + "]";
     }
 
 
