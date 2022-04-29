@@ -25,11 +25,9 @@ public class Candidate {
     private String surname;
     @Column(nullable = false)
     private Gender gender;
-    @OneToMany(mappedBy = "employee")
-
     private File  cv;
     private String nationalId;
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "Candidate")
     private Set<Interview> interviews;
     private EducationLevel educationLevel;
     private int yearsOfExperince;

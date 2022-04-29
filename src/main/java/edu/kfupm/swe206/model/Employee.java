@@ -19,8 +19,9 @@ public class Employee extends Candidate {
     private String surname;
     private File CV;
     private String nationalId;
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "interviewer")
     private Set<Interview> interviews;
+    @OneToMany(mappedBy = "employee")
     private Set<Job> jobs;
     @Enumerated(EnumType.STRING)
     Gender gender;

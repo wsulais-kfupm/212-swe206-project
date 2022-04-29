@@ -1,7 +1,25 @@
 package edu.kfupm.swe206.model;
+
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 import java.util.*;
+
+@Entity
 public class Interview{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "interviewer_id")
     Employee interviewer;
+    @ManyToOne
+    @JoinColumn(name = "candidate_id")
     Candidate Candidate;
     Date date;
 
