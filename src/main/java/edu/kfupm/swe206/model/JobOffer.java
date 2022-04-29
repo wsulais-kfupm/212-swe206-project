@@ -107,7 +107,11 @@ public class JobOffer{
     }
 
     public void setOfferedSalary(double offeredSalary) {
-        this.offeredSalary = offeredSalary;
+        if (getLowerSalary() <= offeredSalary && offeredSalary <= getHigherSalary()) {
+            this.offeredSalary = offeredSalary;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     public Set<Benefit> getBenefits() {
