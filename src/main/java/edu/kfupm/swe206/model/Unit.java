@@ -1,10 +1,7 @@
 package edu.kfupm.swe206.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,101 +19,112 @@ import javax.transaction.Transactional;
 @Transactional
 public class Unit {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
 
-    @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
-    private UnitType type;
-    @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private Unit parent;
-    @OneToMany(mappedBy = "parent")
-    private Set<Unit> subunits;
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "unit_job_bands", joinColumns = @JoinColumn(name = "unit_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "job_band_id", referencedColumnName = "id"))
-    private Set<JobBand> bands;
-    @OneToMany(mappedBy = "unit")
-    private Set<Job> jobs;
+  @Column(nullable = false)
+  private String name;
 
-    protected Unit() {
+  @Column(nullable = false)
+  private UnitType type;
 
-    }
+  @ManyToOne
+  @JoinColumn(name = "parent_id")
+  private Unit parent;
 
-    public Unit(String name, UnitType type, Unit parent, Set<Unit> subunits, Set<JobBand> bands, Set<Job> jobs) {
-        this.name = name;
-        this.type = type;
-        this.parent = parent;
-        this.subunits = subunits;
-        this.bands = bands;
-        this.jobs = jobs;
-    }
+  @OneToMany(mappedBy = "parent")
+  private Set<Unit> subunits;
 
-    public Unit(String name, UnitType type, Set<JobBand> bands) {
-        this(name, type, null, null, bands, null);
-    }
+  @ManyToMany(cascade = CascadeType.MERGE)
+  @JoinTable(
+      name = "unit_job_bands",
+      joinColumns = @JoinColumn(name = "unit_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "job_band_id", referencedColumnName = "id"))
+  private Set<JobBand> bands;
 
-    public Unit(String name, UnitType type) {
-        this(name, type, new HashSet<JobBand>());
-    }
+  @OneToMany(mappedBy = "unit")
+  private Set<Job> jobs;
 
-    public String getTitle() {
-        return getName() + " " + type;
-    }
+  protected Unit() {}
 
-    public String getName() {
-        return name;
-    }
+  public Unit(
+      String name,
+      UnitType type,
+      Unit parent,
+      Set<Unit> subunits,
+      Set<JobBand> bands,
+      Set<Job> jobs) {
+    this.name = name;
+    this.type = type;
+    this.parent = parent;
+    this.subunits = subunits;
+    this.bands = bands;
+    this.jobs = jobs;
+  }
 
-    public Unit getParent() {
-        return parent;
-    }
+  public Unit(String name, UnitType type, Set<JobBand> bands) {
+    this(name, type, null, null, bands, null);
+  }
 
-    public void setParent(Unit parent) {
-        this.parent = parent;
-    }
+  public Unit(String name, UnitType type) {
+    this(name, type, new HashSet<JobBand>());
+  }
 
-    public Set<Job> getJobs() {
-        return jobs;
-    }
+  public String getTitle() {
+    return getName() + " " + type;
+  }
 
-    public void setJobs(Set<Job> jobs) {
-        this.jobs = jobs;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public Unit getParent() {
+    return parent;
+  }
 
-    public UnitType getType() {
-        return type;
-    }
+  public void setParent(Unit parent) {
+    this.parent = parent;
+  }
 
-    public void setType(UnitType type) {
-        this.type = type;
-    }
+  public Set<Job> getJobs() {
+    return jobs;
+  }
 
-    public Set<Unit> getSubunits() {
-        return subunits;
-    }
+  public void setJobs(Set<Job> jobs) {
+    this.jobs = jobs;
+  }
 
-    public void setSubunits(Set<Unit> subunits) {
-        this.subunits = subunits;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public Set<JobBand> getBands() {
-        return bands;
-    }
+  public UnitType getType() {
+    return type;
+  }
 
-    public void setBands(Set<JobBand> bands) {
-        this.bands = bands;
-    }
+  public void setType(UnitType type) {
+    this.type = type;
+  }
 
-    @Override
-    public String toString() {
-        return "Unit [id=" + id + ", name=" + name + ", type=" + type + "]";
-    }
+  public Set<Unit> getSubunits() {
+    return subunits;
+  }
 
+  public void setSubunits(Set<Unit> subunits) {
+    this.subunits = subunits;
+  }
+
+  public Set<JobBand> getBands() {
+    return bands;
+  }
+
+  public void setBands(Set<JobBand> bands) {
+    this.bands = bands;
+  }
+
+  @Override
+  public String toString() {
+    return "Unit [id=" + id + ", name=" + name + ", type=" + type + "]";
+  }
 }

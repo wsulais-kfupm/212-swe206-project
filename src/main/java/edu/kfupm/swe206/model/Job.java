@@ -10,75 +10,85 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Job {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "unit_id")
-    private Unit unit;
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
-    @ManyToOne
-    @JoinColumn(name = "job_position_id")
-    private JobPosition position;
-    private int salary;
+  @ManyToOne
+  @JoinColumn(name = "unit_id")
+  private Unit unit;
 
-    protected Job() {
+  @ManyToOne
+  @JoinColumn(name = "employee_id")
+  private Employee employee;
 
-    }
+  @ManyToOne
+  @JoinColumn(name = "job_position_id")
+  private JobPosition position;
 
-    public Job(Unit unit, Employee employee, JobPosition position, int salary) {
-        this.unit = unit;
-        this.employee = employee;
-        this.position = position;
-        this.salary = salary;
-    }
+  private int salary;
 
-    public Job(Employee employee, JobOffer offer) {
-        this(offer.getUnit(), employee, offer.getPosition(), (int) offer.getOfferedSalary());
-    }
+  protected Job() {}
 
-    public Unit getUnit() {
-        return unit;
-    }
+  public Job(Unit unit, Employee employee, JobPosition position, int salary) {
+    this.unit = unit;
+    this.employee = employee;
+    this.position = position;
+    this.salary = salary;
+  }
 
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-    }
+  public Job(Employee employee, JobOffer offer) {
+    this(offer.getUnit(), employee, offer.getPosition(), (int) offer.getOfferedSalary());
+  }
 
-    public Employee getEmployee() {
-        return employee;
-    }
+  public Unit getUnit() {
+    return unit;
+  }
 
-    public String getTitle() {
-        return unit.getName() + " " + position.getName();
-    }
+  public void setUnit(Unit unit) {
+    this.unit = unit;
+  }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
+  public Employee getEmployee() {
+    return employee;
+  }
 
-    public JobPosition getPosition() {
-        return position;
-    }
+  public String getTitle() {
+    return unit.getName() + " " + position.getName();
+  }
 
-    public void setPosition(JobPosition position) {
-        this.position = position;
-    }
+  public void setEmployee(Employee employee) {
+    this.employee = employee;
+  }
 
-    public int getSalary() {
-        return salary;
-    }
+  public JobPosition getPosition() {
+    return position;
+  }
 
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
+  public void setPosition(JobPosition position) {
+    this.position = position;
+  }
 
-    @Override
-    public String toString() {
-        return "Job [id=" + id + ", employee=" + employee + ", position=" + position + ", salary=" + salary + ", unit="
-                + unit + "]";
-    }
+  public int getSalary() {
+    return salary;
+  }
+
+  public void setSalary(int salary) {
+    this.salary = salary;
+  }
+
+  @Override
+  public String toString() {
+    return "Job [id="
+        + id
+        + ", employee="
+        + employee
+        + ", position="
+        + position
+        + ", salary="
+        + salary
+        + ", unit="
+        + unit
+        + "]";
+  }
 }
