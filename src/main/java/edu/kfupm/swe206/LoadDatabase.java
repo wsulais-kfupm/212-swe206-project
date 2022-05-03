@@ -101,4 +101,18 @@ class LoadDatabase {
       }
     };
   }
+
+  @Bean
+  CommandLineRunner initBenefits(
+      final BenefitRepository benefits) {
+    return args -> {
+      Benefit housing = new Benefit("Housing", 0.2);
+      Benefit transportation = new Benefit("Transporation", 0.2);
+      benefits.save(housing);
+      benefits.save(transportation);
+      for (Benefit benefit : benefits.findAll()) {
+        log.info("Preloaded " + benefit);
+      }
+    };
+  }
 }
