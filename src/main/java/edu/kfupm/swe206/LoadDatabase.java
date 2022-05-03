@@ -115,4 +115,26 @@ class LoadDatabase {
       }
     };
   }
+
+  @Bean
+  CommandLineRunner initJobOffers(
+      final CandidateRepository candidates,
+      final UnitRepository units,
+      final JobPositionRepository positions,
+      final JobOfferRepository offers,
+      final BenefitRepository benefits) {
+    return args -> {
+      Candidate candidate = candidates.findById(1L).get();
+      Unit unit = units.findById(7L).get();
+      JobPosition position = positions.findById(5L).get();
+      JobOffer offer = new JobOffer(candidate, unit, position);
+      for (Benefit benefit : benefits.findAll()) {
+        offer.getBenefits().add(benefit);
+      }
+      offers.save(offer);
+      for (JobOffer jobOffer : offers.findAll()) {
+        log.info("Preloaded " + jobOffer);
+      }
+    };
+  }
 }
