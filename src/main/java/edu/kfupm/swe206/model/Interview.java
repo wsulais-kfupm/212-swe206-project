@@ -88,4 +88,9 @@ public class Interview {
   public void setResult(InterviewResult result) {
     this.result = result;
   }
+
+  @Override
+  public String toString() {
+    return "Interview [id=" + id + ", candidate=" + candidate + ", interviewer=" + interviewer + ", date=" + date + ", result=" + result + "]";
+  }
 }
