@@ -43,6 +43,10 @@ public class JobPosition {
     this(name, band, new HashSet<Job>(), baseSalary);
   }
 
+  public long getId() {
+    return this.id;
+  }
+
   public String getName() {
     return name;
   }

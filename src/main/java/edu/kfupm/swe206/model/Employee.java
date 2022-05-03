@@ -31,6 +31,10 @@ public class Employee {
     this.jobs.add(new Job(this, jobOffer));
   }
 
+  public long getId() {
+    return this.id;
+  }
+
   public Candidate getCandidate() {
     return candidate;
   }

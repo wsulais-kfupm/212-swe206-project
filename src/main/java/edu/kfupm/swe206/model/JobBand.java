@@ -52,6 +52,10 @@ public class JobBand {
     this(name, new HashSet<JobPosition>(), new HashSet<Unit>());
   }
 
+  public long getId() {
+    return this.id;
+  }
+
   public String getName() {
     return name;
   }

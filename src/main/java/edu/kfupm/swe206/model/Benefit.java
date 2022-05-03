@@ -27,6 +27,10 @@ public class Benefit {
     this.salaryRate = salaryRate;
   }
 
+  public long getId() {
+    return this.id;
+  }
+
   public String getName() {
     return name;
   }

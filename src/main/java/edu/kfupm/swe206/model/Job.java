@@ -41,6 +41,10 @@ public class Job {
     this(offer.getUnit(), employee, offer.getPosition(), (int) offer.getOfferedSalary());
   }
 
+  public long getId() {
+    return this.id;
+  }
+
   public Unit getUnit() {
     return unit;
   }

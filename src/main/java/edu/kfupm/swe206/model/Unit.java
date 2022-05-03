@@ -71,6 +71,10 @@ public class Unit {
     this(name, type, new HashSet<JobBand>());
   }
 
+  public long getId() {
+    return this.id;
+  }
+
   public String getTitle() {
     return getName() + " " + type;
   }

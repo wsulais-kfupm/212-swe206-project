@@ -44,6 +44,10 @@ public class Interview {
     this.date = date;
   }
 
+  public long getId() {
+    return this.id;
+  }
+
   public Candidate getCandidate() {
     return candidate;
   }

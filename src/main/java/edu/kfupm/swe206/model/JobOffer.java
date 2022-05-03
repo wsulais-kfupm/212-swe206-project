@@ -52,6 +52,10 @@ public class JobOffer {
     this.offeredSalary = getBaseSalary() * getBenefitRates();
   }
 
+  public long getId() {
+    return this.id;
+  }
+
   Candidate getCandidate() {
     return candidate;
   }
