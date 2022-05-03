@@ -46,4 +46,9 @@ public class Benefit {
   public void setSalaryRate(double salaryRate) {
     this.salaryRate = salaryRate;
   }
+
+  @Override
+  public String toString() {
+    return "Benefit [id=" + id + ", name=" + name + ", salaryRate=" + salaryRate + "]";
+  }
 }
