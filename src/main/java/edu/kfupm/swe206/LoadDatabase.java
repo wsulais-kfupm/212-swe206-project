@@ -1,6 +1,7 @@
 package edu.kfupm.swe206;
 
 
+import java.time.OffsetDateTime;
 
 import edu.kfupm.swe206.model.*;
 import edu.kfupm.swe206.repo.*;
@@ -81,6 +82,22 @@ class LoadDatabase {
       jobs.save(job);
       for (Job j : jobs.findAll()) {
         log.info("Preloaded " + job);
+      }
+    };
+  }
+
+  @Bean
+  CommandLineRunner initInterviews(
+      final InterviewRepository interviews,
+      final EmployeeRepository employees) {
+    return args -> {
+      Employee employee = employees.findById(2L).get();
+      Candidate candidate = employee.getCandidate();
+      Interview interview = new Interview(employee, candidate, OffsetDateTime.now());
+      interview.setResult(InterviewResult.PASS);
+      interviews.save(interview);
+      for (Interview in : interviews.findAll()) {
+        log.info("Preloaded " + in);
       }
     };
   }
