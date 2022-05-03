@@ -123,4 +123,9 @@ public class JobOffer {
   public void setBenefits(Set<Benefit> benefits) {
     this.benefits = benefits;
   }
+
+  @Override
+  public String toString() {
+    return "JobOffer [id=" + id + ", candidate=" + candidate + ", unit=" + unit + ", position=" + position + ", offeredSalary=" + offeredSalary + "]";
+  }
 }
