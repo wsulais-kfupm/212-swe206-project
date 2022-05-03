@@ -44,6 +44,10 @@ public class JobOffer {
 
   protected JobOffer() {}
 
+  public JobOffer(Candidate candidate, Unit unit, JobPosition position) {
+    this(candidate, unit, position, new java.util.HashSet<>());
+  }
+
   public JobOffer(Candidate candidate, Unit unit, JobPosition position, Set<Benefit> benefits) {
     this.unit = unit;
     this.position = position;
