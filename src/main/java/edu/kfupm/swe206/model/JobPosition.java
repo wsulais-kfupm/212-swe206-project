@@ -1,9 +1,7 @@
 package edu.kfupm.swe206.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,58 +14,73 @@ import javax.persistence.OneToMany;
 @Entity
 public class JobPosition {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
 
-    @Column(nullable = false)
-    private String name;
-    @ManyToOne
-    @JoinColumn(name = "band_id")
-    private JobBand band;
-    @OneToMany(mappedBy = "position")
-    private Set<Job> jobs;
+  @Column(nullable = false)
+  private String name;
 
-    protected JobPosition() {
-    }
+  @ManyToOne
+  @JoinColumn(name = "band_id")
+  private JobBand band;
 
-    public JobPosition(String name, JobBand band, Set<Job> jobs) {
-        this.name = name;
-        this.band = band;
-        this.jobs = jobs;
-    }
+  @OneToMany(mappedBy = "position")
+  private Set<Job> jobs;
 
-    public JobPosition(String name, JobBand band) {
-        this(name, band, new HashSet<Job>());
-    }
+  private double baseSalary;
 
-    public String getName() {
-        return name;
-    }
+  protected JobPosition() {}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public JobPosition(String name, JobBand band, Set<Job> jobs, double baseSalary) {
+    this.name = name;
+    this.band = band;
+    this.jobs = jobs;
+    this.baseSalary = baseSalary;
+  }
 
-    public JobBand getBand() {
-        return band;
-    }
+  public JobPosition(String name, JobBand band, double baseSalary) {
+    this(name, band, new HashSet<Job>(), baseSalary);
+  }
 
-    public void setBand(JobBand band) {
-        this.band = band;
-    }
+  public long getId() {
+    return this.id;
+  }
 
-    public Set<Job> getJobs() {
-        return jobs;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setJobs(Set<Job> jobs) {
-        this.jobs = jobs;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    @Override
-    public String toString() {
-        return "JobPosition [id=" + id + ", name=" + name + "]";
-    }
+  public JobBand getBand() {
+    return band;
+  }
 
+  public void setBand(JobBand band) {
+    this.band = band;
+  }
+
+  public Set<Job> getJobs() {
+    return jobs;
+  }
+
+  public void setJobs(Set<Job> jobs) {
+    this.jobs = jobs;
+  }
+
+  public double getBaseSalary() {
+    return baseSalary;
+  }
+
+  public void setBaseSalary(double baseSalary) {
+    this.baseSalary = baseSalary;
+  }
+
+  @Override
+  public String toString() {
+    return "JobPosition [id=" + id + ", name=" + name + "]";
+  }
 }
