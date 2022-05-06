@@ -59,6 +59,10 @@ public class Candidate {
     return this.id;
   }
 
+  public void setId(long id) {
+    this.id = id;
+  }
+
   public String getName() {
     return forename + " " + surname;
   }
@@ -97,8 +101,8 @@ public class Candidate {
     return cv;
   }
 
-  public void setCV(byte[] CV) {
-    this.cv = cv;
+  public void setCV(byte[] newCV) {
+    this.cv = newCV;
   }
 
   public Period getExperience() {
