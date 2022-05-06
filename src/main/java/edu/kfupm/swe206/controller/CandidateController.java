@@ -44,7 +44,7 @@ public class CandidateController {
       candidate.setCV(file.getBytes());
       candidates.save(candidate);
     } else {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+      throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED);
     }
   }
 }
