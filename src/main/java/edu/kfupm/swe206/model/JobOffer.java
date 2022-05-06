@@ -56,6 +56,12 @@ public class JobOffer {
     this.offeredSalary = getBaseSalary() * getBenefitRates();
   }
 
+  public static JobOffer fromInterview(Interview interview) {
+    // Employees are guarranteed to have at least one job
+    Job job = interview.interviewer.getJobs().iterator().next();
+    return new JobOffer(interview.candidate, job.getUnit(), job.getPosition());
+  }
+
   public long getId() {
     return this.id;
   }
