@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Lob;
 
 @Entity
 public class Candidate {
@@ -27,7 +28,9 @@ public class Candidate {
   @Column(nullable = false)
   private Gender gender;
 
-  private File cv;
+  @Lob
+  @Column(columnDefinition="BLOB")
+  private byte[] cv;
   private String nationalId;
 
   @OneToMany(mappedBy = "candidate")
@@ -90,11 +93,11 @@ public class Candidate {
     this.nationalId = nationalId;
   }
 
-  public File getCV() {
+  public byte[] getCV() {
     return cv;
   }
 
-  public void setCV(File CV) {
+  public void setCV(byte[] CV) {
     this.cv = cv;
   }
 
