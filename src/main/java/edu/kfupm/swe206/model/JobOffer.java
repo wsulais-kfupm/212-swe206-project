@@ -66,11 +66,11 @@ public class JobOffer {
     return this.id;
   }
 
-  Candidate getCandidate() {
+  public Candidate getCandidate() {
     return candidate;
   }
 
-  void setCandidate(Candidate candidate) {
+  public void setCandidate(Candidate candidate) {
     this.candidate = candidate;
   }
 
