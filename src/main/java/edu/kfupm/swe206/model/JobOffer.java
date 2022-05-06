@@ -80,6 +80,7 @@ public class JobOffer {
 
   public void setUnit(Unit unit) {
     this.unit = unit;
+    updateOfferedSalary();
   }
 
   public JobPosition getPosition() {
@@ -88,6 +89,7 @@ public class JobOffer {
 
   public void setPosition(JobPosition position) {
     this.position = position;
+    updateOfferedSalary();
   }
 
   public double getBaseSalary() {
@@ -122,15 +124,21 @@ public class JobOffer {
     }
   }
 
+  public boolean updateOfferedSalary() {
+    if (offeredSalary < getLowerSalary() || getHigherSalary() < offeredSalary) {
+      this.offeredSalary = getSalary(candidate.getExperience().getYears());
+      return true;
+    }
+    return false;
+  }
+
   public Set<Benefit> getBenefits() {
     return benefits;
   }
 
   public void setBenefits(Set<Benefit> benefits) {
     this.benefits = benefits;
-    if (offeredSalary < getLowerSalary() || getHigherSalary() < offeredSalary) {
-      this.offeredSalary = getSalary(candidate.getExperience().getYears());
-    }
+    updateOfferedSalary();
   }
 
   @Override
