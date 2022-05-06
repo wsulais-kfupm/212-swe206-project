@@ -11,8 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Lob;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@JsonIgnoreProperties(value = { "cv" })
 public class Candidate {
 
   @Id
@@ -27,7 +30,9 @@ public class Candidate {
   @Column(nullable = false)
   private Gender gender;
 
-  private File cv;
+  @Lob
+  @Column(columnDefinition="BLOB")
+  private byte[] cv;
   private String nationalId;
 
   @OneToMany(mappedBy = "candidate")
@@ -54,6 +59,10 @@ public class Candidate {
 
   public long getId() {
     return this.id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -90,12 +99,12 @@ public class Candidate {
     this.nationalId = nationalId;
   }
 
-  public File getCV() {
+  public byte[] getCV() {
     return cv;
   }
 
-  public void setCV(File CV) {
-    this.cv = cv;
+  public void setCV(byte[] newCV) {
+    this.cv = newCV;
   }
 
   public Period getExperience() {

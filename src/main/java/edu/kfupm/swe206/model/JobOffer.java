@@ -53,18 +53,24 @@ public class JobOffer {
     this.position = position;
     this.candidate = candidate;
     this.benefits = benefits;
-    this.offeredSalary = getBaseSalary() * getBenefitRates();
+    this.offeredSalary = getSalary(candidate.getExperience().getYears());
+  }
+
+  public static JobOffer fromInterview(Interview interview) {
+    // Employees are guarranteed to have at least one job
+    Job job = interview.interviewer.getJobs().iterator().next();
+    return new JobOffer(interview.candidate, job.getUnit(), job.getPosition());
   }
 
   public long getId() {
     return this.id;
   }
 
-  Candidate getCandidate() {
+  public Candidate getCandidate() {
     return candidate;
   }
 
-  void setCandidate(Candidate candidate) {
+  public void setCandidate(Candidate candidate) {
     this.candidate = candidate;
   }
 
@@ -74,6 +80,7 @@ public class JobOffer {
 
   public void setUnit(Unit unit) {
     this.unit = unit;
+    updateOfferedSalary();
   }
 
   public JobPosition getPosition() {
@@ -82,6 +89,7 @@ public class JobOffer {
 
   public void setPosition(JobPosition position) {
     this.position = position;
+    updateOfferedSalary();
   }
 
   public double getBaseSalary() {
@@ -116,12 +124,21 @@ public class JobOffer {
     }
   }
 
+  public boolean updateOfferedSalary() {
+    if (offeredSalary < getLowerSalary() || getHigherSalary() < offeredSalary) {
+      this.offeredSalary = getSalary(candidate.getExperience().getYears());
+      return true;
+    }
+    return false;
+  }
+
   public Set<Benefit> getBenefits() {
     return benefits;
   }
 
   public void setBenefits(Set<Benefit> benefits) {
     this.benefits = benefits;
+    updateOfferedSalary();
   }
 
   @Override
