@@ -53,7 +53,7 @@ public class JobOffer {
     this.position = position;
     this.candidate = candidate;
     this.benefits = benefits;
-    this.offeredSalary = getBaseSalary() * getBenefitRates();
+    this.offeredSalary = getSalary(candidate.getExperience().getYears());
   }
 
   public static JobOffer fromInterview(Interview interview) {
@@ -128,6 +128,9 @@ public class JobOffer {
 
   public void setBenefits(Set<Benefit> benefits) {
     this.benefits = benefits;
+    if (offeredSalary < getLowerSalary() || getHigherSalary() < offeredSalary) {
+      this.offeredSalary = getSalary(candidate.getExperience().getYears());
+    }
   }
 
   @Override
